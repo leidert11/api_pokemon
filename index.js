@@ -1,9 +1,15 @@
-window.addEventListener("DOMContentLoaded", () => {
-    getPokemon();
+document.addEventListener("DOMContentLoaded", () => {
+    getPokemon(20); // Límite predeterminado en 5
+    const filtrarCantidadButton = document.querySelector("#filtrarCantidad");
+    filtrarCantidadButton.addEventListener("click", () => {
+        const cantidadPokemonInput = document.querySelector("#cantidadPokemon");
+        const cantidadPokemon = parseInt(cantidadPokemonInput.value);
+        getPokemon(cantidadPokemon); // Actualiza el límite de Pokémon
+    });
 });
 //traer los pokemons de la api
-function getPokemon() {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=78")
+function getPokemon(limit) {
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`)
         .then(res => res.json())
         .then(data => {
             crearBotonesElemento(data.results);
@@ -35,6 +41,17 @@ function crearBotonesElemento(pokemons) {
                     botonElemento.appendChild(tipoButton);
                 });
             });
+    });
+}
+//mostrar cantidad de pokemones
+function filtrarPorCantidad(cantidad) {
+    const pokemonCards = document.querySelectorAll(".pokemon-card");
+    pokemonCards.forEach((card, index) => {
+        if (index < cantidad) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
     });
 }
 //tarjetas de pokemon
