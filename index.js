@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 //traer los pokemons de la api
 function getPokemon() {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=122")
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=78")
         .then(res => res.json())
         .then(data => {
             crearBotonesElemento(data.results);
@@ -29,6 +29,7 @@ function crearBotonesElemento(pokemons) {
                 botonElemento.innerHTML = ""; 
                 tiposElemento.forEach(tipo => {
                     const tipoButton = document.createElement("button");
+                    tipoButton.classList.add("tipo-button");
                     tipoButton.innerText = tipo;
                     tipoButton.addEventListener("click", () => filtrarPorTipo(tipo));
                     botonElemento.appendChild(tipoButton);
@@ -64,7 +65,7 @@ function crearPokemonCards(pokemons) {
 
 function crearCard(pokemonData) {
     const card = document.createElement("div");//crea un elemento de tipo div
-    card.classList.add("pokemon-card");//le da una classe al elemtno div ceado
+    card.classList.add("pokemon-card");//le da una clase al elemento div ceado
     card.dataset.types = pokemonData.types.map(type => type.type.name).join(",");
     
     const img = document.createElement("img");
