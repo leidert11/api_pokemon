@@ -1,28 +1,72 @@
-window.addEventListener("DOMContentLoaded", ()=>{
+window.addEventListener("DOMContentLoaded", () => {
     getPokemon();
-})
-
-function getPokemon(){
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=50")
-        .then(res=>res.json())
-        .then(data=> crearPokemonCards(data.results));
+});
+//traer los pokemons de la api
+function getPokemon() {
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=122")
+        .then(res => res.json())
+        .then(data => {
+            crearBotonesElemento(data.results);
+            crearPokemonCards(data.results);
+        });
 }
-
-function crearPokemonCards(pokemons){
-    const pokemonCards = document.querySelector("#pokemonCards")
+//botones de los elemento 
+function crearBotonesElemento(pokemons) {
+    const tiposElemento = [];
     pokemons.forEach(pokemon => {
         fetch(pokemon.url)
-            .then(res=> res.json())
-            .then(PokemonData=>{
-                const card = crearCard(PokemonData)
-                pokemonCards.appendChild(card)
+            .then(res => res.json())
+            .then(PokemonData => {
+                PokemonData.types.forEach(type => {
+                    const tipoNombre = type.type.name;
+                    if (!tiposElemento.includes(tipoNombre)) {
+                        tiposElemento.push(tipoNombre);
+                    }
+                });
+            })
+            .then(() => {
+                const botonElemento = document.querySelector("#botonElemento");
+                botonElemento.innerHTML = ""; 
+                tiposElemento.forEach(tipo => {
+                    const tipoButton = document.createElement("button");
+                    tipoButton.innerText = tipo;
+                    tipoButton.addEventListener("click", () => filtrarPorTipo(tipo));
+                    botonElemento.appendChild(tipoButton);
+                });
+            });
+    });
+}
+//tarjetas de pokemon
+function filtrarPorTipo(tipo) {
+    const pokemonCards = document.querySelectorAll(".pokemon-card");
+    pokemonCards.forEach(card => {
+        const tiposElemento = card.dataset.types.split(",");
+        if (tiposElemento.includes(tipo)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
+function crearPokemonCards(pokemons) {
+    const pokemonCards = document.querySelector("#pokemonCards");
+    pokemonCards.innerHTML = ""; 
+    pokemons.forEach(pokemon => {
+        fetch(pokemon.url)
+            .then(res => res.json())
+            .then(PokemonData => {
+                const card = crearCard(PokemonData);
+                pokemonCards.appendChild(card);
             })
     });
 }
 
-function crearCard(pokemonData){
-    const card = document.createElement("div");
-    card.classList.add("pokemon-card");
+function crearCard(pokemonData) {
+    const card = document.createElement("div");//crea un elemento de tipo div
+    card.classList.add("pokemon-card");//le da una classe al elemtno div ceado
+    card.dataset.types = pokemonData.types.map(type => type.type.name).join(",");
+    
     const img = document.createElement("img");
     img.src = pokemonData.sprites.front_default;
     card.appendChild(img);
@@ -70,6 +114,4 @@ function infoPokemon(pokemon) {
         imageHeight: 200,
         imageAlt: 'Custom image',
     });
-    
 }
-
