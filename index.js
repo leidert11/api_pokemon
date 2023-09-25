@@ -50,6 +50,17 @@ function filtrarPorCantidad(cantidad) {
         card.style.display = index < cantidad ? "block" : "none";
     });
 }
+//mostrar cantidad de pokemones
+function filtrarPorCantidad(cantidad) {
+    const pokemonCards = document.querySelectorAll(".pokemon-card");
+    pokemonCards.forEach((card, index) => {
+        if (index < cantidad) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
 //tarjetas de pokemon
 function filtrarPorTipo(tipo) {
     const pokemonCards = document.querySelectorAll(".pokemon-card");
