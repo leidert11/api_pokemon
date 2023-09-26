@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     background-image: url("https://i.pinimg.com/originals/f5/05/f5/f505f5040274b97cd5114f9ff3ab8b99.jpg");
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -38,6 +39,7 @@ body {
     max-width: 100%;
     max-height: 100%;
 }
+
 .pokemon-cards-container {
     display: flex;
     flex-wrap: wrap;
