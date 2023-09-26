@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-    getPokemon(20); // Límite predeterminado en 5
+    getPokemon(20); // Inicializa la aplicación con 20 Pokémon
+    
     const filtrarCantidadButton = document.querySelector("#filtrarCantidad");
     filtrarCantidadButton.addEventListener("click", () => {
         const cantidadPokemonInput = document.querySelector("#cantidadPokemon");
         const cantidadPokemon = parseInt(cantidadPokemonInput.value);
-        getPokemon(cantidadPokemon); // Actualiza el límite de Pokémon
+        getPokemon(cantidadPokemon); // Actualiza la aplicación con la nueva cantidad de Pokémon
     });
+
+    const buscarBoton = document.querySelector("#buscarBoton");
+    buscarBoton.addEventListener("click", buscarPokemon); // Agrega un listener al botón "Buscar Pokémon"
 });
 //traer los pokemons de la api
 function getPokemon(limit) {
@@ -25,9 +29,7 @@ function crearBotonesElemento(pokemons) {
             .then(PokemonData => {
                 PokemonData.types.forEach(type => {
                     const tipoNombre = type.type.name;
-                    if (!tiposElemento.includes(tipoNombre)) {
-                        tiposElemento.push(tipoNombre);
-                    }
+                    tiposElemento.includes(tipoNombre) || tiposElemento.push(tipoNombre);
                 });
             })
             .then(() => {
@@ -43,40 +45,47 @@ function crearBotonesElemento(pokemons) {
             });
     });
 }
+
 //mostrar cantidad de pokemones
 function filtrarPorCantidad(cantidad) {
     const pokemonCards = document.querySelectorAll(".pokemon-card");
     pokemonCards.forEach((card, index) => {
-        if (index < cantidad) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
+        card.style.display = index < cantidad ? "block" : "none";
     });
 }
+
 //tarjetas de pokemon
 function filtrarPorTipo(tipo) {
     const pokemonCards = document.querySelectorAll(".pokemon-card");
     pokemonCards.forEach(card => {
         const tiposElemento = card.dataset.types.split(",");
-        if (tiposElemento.includes(tipo)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
+        card.style.display = tiposElemento.includes(tipo) ? "block" : "none";
+    });
+}
+
+
+function buscarPokemon() {
+    const buscarPokemonInput = document.querySelector("#buscarPokemon");
+    const nombrePokemon = buscarPokemonInput.value.toLowerCase();
+
+    const pokemonCards = document.querySelectorAll(".pokemon-card");
+    pokemonCards.forEach(card => {
+        const nombre = card.dataset.nombre.toLowerCase();
+        card.style.display = (nombre.includes(nombrePokemon) || nombrePokemon === "") ? "block" : "none";
     });
 }
 
 function crearPokemonCards(pokemons) {
     const pokemonCards = document.querySelector("#pokemonCards");
-    pokemonCards.innerHTML = ""; 
+    pokemonCards.innerHTML = "";
     pokemons.forEach(pokemon => {
         fetch(pokemon.url)
             .then(res => res.json())
             .then(PokemonData => {
                 const card = crearCard(PokemonData);
+                card.dataset.nombre = PokemonData.name; // asigna el nombre del Pokemon como atributo de datos
                 pokemonCards.appendChild(card);
-            })
+            });
     });
 }
 

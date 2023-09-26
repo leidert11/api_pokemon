@@ -1,26 +1,29 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     background-image: url("https://i.pinimg.com/originals/f5/05/f5/f505f5040274b97cd5114f9ff3ab8b99.jpg");
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: 100vh; 
-    margin: 0; 
+    background-attachment: fixed;
+    min-height: 100vh;
+
 }
 
-.container_principal{
+.container_principal {
     margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center ;
+    justify-content: center;
     align-items: center;
-    
+
 }
+
 .pokemon-card {
     width: 100px;
     height: 100px;
@@ -29,40 +32,51 @@ body {
     display: inline-flex;
     border-radius: 6px;
     background-color: white;
+    cursor: pointer;
 }
+
 .pokemon-card img {
     max-width: 100%;
     max-height: 100%;
 }
+
 .pokemon-cards-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.titulo{
+.titulo {
     margin: 10px;
     height: 9rem;
 }
-.titulo_sec{
+
+.titulo_sec {
     margin: 10px;
     color: white;
     text-align: center;
     font-size: 3rem;
-    
+
 }
-.pokemon-info{
-    display: flex; flex-direction: column; align-items: center;border: 0;
+
+.pokemon-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0;
 }
-.abilities{
+
+.abilities {
     border: 0px;
 }
-.container{
+
+.container {
     margin: auto;
     display: flex;
-    justify-content: center ;
+    justify-content: center;
 }
-.tipo-button{
+
+.tipo-button {
     color: rgb(136, 136, 15);
     height: 2rem;
     width: 3.9rem;
@@ -74,9 +88,64 @@ body {
     align-items: center;
     justify-content: center;
 }
-.tipo-button:hover{
+
+.tipo-button:hover {
     background-color: rgb(62, 64, 63);
     cursor: pointer;
     transition: 1s;
     color: white;
+}
+
+.cantidad {
+    margin: 20px;
+    
+}
+
+#cantidadPokemon {
+    width: 12rem;
+    height: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid rgb(235, 235, 17);
+    font-weight: 600;
+
+}
+
+#filtrarCantidad {
+    margin-left: 10px;
+    height: 2rem;
+    width: 5rem;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(136, 136, 15);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.buscar_container {
+    margin: 20px;
+    
+}
+
+#buscarPokemon {
+    width: 12rem;
+    height: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid rgb(235, 235, 17);
+    font-weight: 600;
+
+}
+
+#buscarBoton {
+    margin-left: 10px;
+    height: 2rem;
+    width: 5rem;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(136, 15, 15);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }

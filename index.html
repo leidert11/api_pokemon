@@ -10,18 +10,20 @@
 </head>
 <body>
     <div class="container_principal">
-
         <img class="titulo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1920px-International_Pok%C3%A9mon_logo.svg.png" alt="img_principal">
         <div class="container">
             <div  id="botonElemento"></div>
         </div>
         <h2 class="titulo_sec">Pokemones</h2>
-        <input type="number" id="cantidadPokemon" value="20" min="1" max="78">
-        <button id="filtrarCantidad">Filtrar</button>
-        
-
+        <div class="buscar_container">
+            <input type="text" id="buscarPokemon" placeholder="Buscar Pokémon">
+            <button id="buscarBoton">Buscar</button>
+        </div>
+        <div class="cantidad">
+            <input type="number" id="cantidadPokemon" value="20" min="1" max="78">
+            <button id="filtrarCantidad">mostrar</button>
+        </div>
         <div class="pokemon-cards-container" id="pokemonCards"></div>
-
     </div>
 </body>
 </html>
