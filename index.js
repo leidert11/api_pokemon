@@ -29,7 +29,7 @@ function crearBotonesElemento() {
             const botonElemento = document.querySelector("#botonElemento");
             botonElemento.innerHTML = ""; //borra cualquier contenido HTML que estuviera en el elemento "botonElemento"
 
-            tiposElemento.forEach(tipo => { // Recorre todos los tipos en 'tiposElemento'
+            tiposElemento.forEach(tipo => {//recorre todos los tipos en 'tiposElemento'
                 const tipoBoton = document.createElement("button"); //crea un nuevo boton para cada tipo
 
                 tipoBoton.classList.add("tipo-boton");//añade una clase al boton
@@ -41,14 +41,6 @@ function crearBotonesElemento() {
                 botonElemento.appendChild(tipoBoton);//añade el boton al elemento "botonElemento"
             });
         });
-}
-
-//mostrar cantidad de pokemones
-function filtrarPorCantidad(cantidad) {
-    const pokemonCards = document.querySelectorAll(".pokemon-card");
-    pokemonCards.forEach((card, index) => {
-        card.style.display = index < cantidad ? "block" : "none";
-    });
 }
 
 //mostrar cantidad de pokemones
