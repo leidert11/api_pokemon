@@ -1,49 +1,46 @@
-document.addEventListener("DOMContentLoaded", () => {
-    getPokemon(20); // Inicializa la aplicación con 20 Pokémon
-    
-    const filtrarCantidadButton = document.querySelector("#filtrarCantidad");
-    filtrarCantidadButton.addEventListener("click", () => {
+document.addEventListener("DOMContentLoaded",() => {
+    getPokemon(20);//por defecto se veran 20 pokemon que se pasan por el parametro "limit"
+    const filtrarCantidadBoton = document.querySelector("#filtrarCantidad");
+    filtrarCantidadBoton.addEventListener("click", () => {
         const cantidadPokemonInput = document.querySelector("#cantidadPokemon");
-        const cantidadPokemon = parseInt(cantidadPokemonInput.value);
-        getPokemon(cantidadPokemon); // Actualiza la aplicación con la nueva cantidad de Pokémon
+        const cantidadPokemon = parseInt(cantidadPokemonInput.value);//el valor se convertira en numero y se tomara su valor
+        getPokemon(cantidadPokemon); //se actualizara la cantidad de pokemones de acuerdo al que se asa por argumentos
     });
-
     const buscarBoton = document.querySelector("#buscarBoton");
-    buscarBoton.addEventListener("click", buscarPokemon); // Agrega un listener al botón "Buscar Pokémon"
+    buscarBoton.addEventListener("click", buscarPokemon); //al hacer click se ejecutara la funcion buscarPokemon
 });
-//traer los pokemons de la api
-function getPokemon(limit) {
-    fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`)
+//solicitu de la api para mostrar pokemones
+function getPokemon(limite) {//de esta manera podra el usuario escoger la cantidd de pokemon que desea ver
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limite}`)
         .then(res => res.json())
         .then(data => {
+            //crear botones para los elementos de acuerdo a los pokemon mostrados
             crearBotonesElemento(data.results);
+            //crea la tarjetas de cada pokemon
             crearPokemonCards(data.results);
         });
 }
-//botones de los elemento 
-function crearBotonesElemento(pokemons) {
-    const tiposElemento = [];
-    pokemons.forEach(pokemon => {
-        fetch(pokemon.url)
-            .then(res => res.json())
-            .then(PokemonData => {
-                PokemonData.types.forEach(type => {
-                    const tipoNombre = type.type.name;
-                    tiposElemento.includes(tipoNombre) || tiposElemento.push(tipoNombre);
-                });
-            })
-            .then(() => {
-                const botonElemento = document.querySelector("#botonElemento");
-                botonElemento.innerHTML = ""; 
-                tiposElemento.forEach(tipo => {
-                    const tipoButton = document.createElement("button");
-                    tipoButton.classList.add("tipo-button");
-                    tipoButton.innerText = tipo;
-                    tipoButton.addEventListener("click", () => filtrarPorTipo(tipo));
-                    botonElemento.appendChild(tipoButton);
-                });
+//funcion para crear los botones para los tipo de pokemon 
+function crearBotonesElemento() {
+    fetch('https://pokeapi.co/api/v2/type/') //hace una solicitud a la API de Pokemon para obtener todos los tipos
+        .then(res => res.json())
+        .then(data => {
+            const tiposElemento = data.results.map(result => result.name);//hace un mapeo para traerme todos los nombres de tpo que hay
+            const botonElemento = document.querySelector("#botonElemento");
+            botonElemento.innerHTML = ""; //borra cualquier contenido HTML que estuviera en el elemento "botonElemento"
+
+            tiposElemento.forEach(tipo => { // Recorre todos los tipos en 'tiposElemento'
+                const tipoBoton = document.createElement("button"); //crea un nuevo boton para cada tipo
+
+                tipoBoton.classList.add("tipo-boton");//añade una clase al boton
+              
+                tipoBoton.innerText = tipo;//asigna el nombre del tipo dentro de cada boton credo
+
+                tipoBoton.addEventListener("click", () => filtrarPorTipo(tipo));
+                
+                botonElemento.appendChild(tipoBoton);//añade el boton al elemento "botonElemento"
             });
-    });
+        });
 }
 
 //mostrar cantidad de pokemones
@@ -53,7 +50,6 @@ function filtrarPorCantidad(cantidad) {
         card.style.display = index < cantidad ? "block" : "none";
     });
 }
-
 //tarjetas de pokemon
 function filtrarPorTipo(tipo) {
     const pokemonCards = document.querySelectorAll(".pokemon-card");
@@ -62,8 +58,6 @@ function filtrarPorTipo(tipo) {
         card.style.display = tiposElemento.includes(tipo) ? "block" : "none";
     });
 }
-
-
 function buscarPokemon() {
     const buscarPokemonInput = document.querySelector("#buscarPokemon");
     const nombrePokemon = buscarPokemonInput.value.toLowerCase();
@@ -107,6 +101,9 @@ function infoPokemon(pokemon) {
         html: `
             <div class="pokemon-info" >
                 <div>
+                    <label for="type">Tipo: <span id="type_value">${pokemon.types.map(type => type.type.name).join(', ')}</span></label>
+                </div>
+                <div>
                     <label for="base_experience">Experiencia: <span id="base_experience_value">${pokemon.base_experience}</span></label>
                     <input type="range" id="base_experience" value="${pokemon.base_experience}" min="0" max="300" readonly /> 
                 </div>
@@ -133,6 +130,9 @@ function infoPokemon(pokemon) {
                 <div>
                     <label for="abilities">Habilidades :</label>
                     <input class="abilities" type="text" id="abilities" value="${pokemon.abilities.map(a => a.ability.name).join(', ')}" readonly />
+                </div>
+                <div>
+                    <label for="type">Tipo: <span id="type_value">${pokemon.types.map(type => type.type.name).join(', ')}</span></label>
                 </div>
             </div>
         `,

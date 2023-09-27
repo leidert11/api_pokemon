@@ -15,13 +15,15 @@
             <div  id="botonElemento"></div>
         </div>
         <h2 class="titulo_sec">Pokemones</h2>
-        <div class="buscar_container">
-            <input type="text" id="buscarPokemon" placeholder="Buscar Pokémon">
-            <button id="buscarBoton">Buscar</button>
-        </div>
-        <div class="cantidad">
-            <input type="number" id="cantidadPokemon" value="20" min="1" max="78">
-            <button id="filtrarCantidad">mostrar</button>
+        <div class="inputs_buscar_cantidad">
+            <div class="container_buscar">
+                <input type="text" id="buscarPokemon" placeholder="Buscar Pokemon">
+                <button id="buscarBoton">Buscar</button>
+            </div>
+            <div class="container_mostrar">
+                <input type="number" id="cantidadPokemon" value="20" min="1" max="78">
+                <button id="filtrarCantidad">Mostrar</button>
+            </div>
         </div>
         <div class="pokemon-cards-container" id="pokemonCards"></div>
     </div>

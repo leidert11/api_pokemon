@@ -74,12 +74,14 @@ body {
     margin: auto;
     display: flex;
     justify-content: center;
+    max-width: 80%;
 }
 
-.tipo-button {
+.tipo-boton {
     color: rgb(136, 136, 15);
     height: 2rem;
-    width: 3.9rem;
+    width: 4.8rem;
+    font-weight: 600;
     font-size: 17px;
     border-radius: 5px;
     border: 0px;
@@ -89,17 +91,13 @@ body {
     justify-content: center;
 }
 
-.tipo-button:hover {
+.tipo-boton:hover {
     background-color: rgb(62, 64, 63);
     cursor: pointer;
     transition: 1s;
     color: white;
 }
 
-.cantidad {
-    margin: 20px;
-    
-}
 
 #cantidadPokemon {
     width: 12rem;
@@ -123,9 +121,10 @@ body {
     cursor: pointer;
 }
 
-.buscar_container {
+.inputs_buscar_cantidad {
     margin: 20px;
-    
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #buscarPokemon {
@@ -135,11 +134,12 @@ body {
     border-radius: 8px;
     border: 1px solid rgb(235, 235, 17);
     font-weight: 600;
-
+    cursor: pointer;   
+    
 }
-
 #buscarBoton {
     margin-left: 10px;
+    margin-right: 10px;
     height: 2rem;
     width: 5rem;
     border-radius: 8px;
@@ -148,4 +148,31 @@ body {
     color: white;
     font-weight: bold;
     cursor: pointer;
+}
+
+
+#buscarPokemon,
+#cantidadPokemon {
+    height: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid rgb(235, 235, 17);
+    font-weight: 600;
+    cursor: pointer;
+}
+.container_buscar,
+.container_mostrar {
+    margin: 0 40px; 
+}
+
+@media screen and (max-width: 600px) {
+    .inputs_buscar_cantidad {
+        flex-direction: column; 
+        align-items: center; 
+    }
+    .inputs_buscar_cantidad input,
+    .inputs_buscar_cantidad button {
+        margin: 15px 0;
+        height: 4.5rem;
+    }
 }
