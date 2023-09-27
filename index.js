@@ -58,7 +58,6 @@ function filtrarPorCantidad(cantidad) {
         card.style.display = index < cantidad ? "block" : "none";
     });
 }
-
 //tarjetas de pokemon
 function filtrarPorTipo(tipo) {
     const pokemonCards = document.querySelectorAll(".pokemon-card");
