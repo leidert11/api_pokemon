@@ -17,7 +17,7 @@ function getPokemon(limite) {//de esta manera podra el usuario escoger la cantid
             //crear botones para los elementos de acuerdo a los pokemon mostrados
             crearBotonesElemento(data.results);
             //crea la tarjetas de cada pokemon
-            crearPokemonCards(data.results);
+            crearPokemonCardData(data.results);
         });
 }
 //funcion para crear los botones para los tipo de pokemon 
@@ -50,49 +50,51 @@ function filtrarPorCantidad(cantidad) {
         card.style.display = index < cantidad ? "block" : "none";
     });
 }
-//tarjetas de pokemon
+//funcion para mostrar pokemon cuando se da click en un boton de un determinado tipo
 function filtrarPorTipo(tipo) {
     const pokemonCards = document.querySelectorAll(".pokemon-card");
     pokemonCards.forEach(card => {
-        const tiposElemento = card.dataset.types.split(",");
-        card.style.display = tiposElemento.includes(tipo) ? "block" : "none";
+        const tiposElemento = card.dataset.types.split(",");//obtiene los tipo de pokemones y los dividi en un array con el split
+        card.style.display = tiposElemento.includes(tipo) ? "block" : "none";//verifica si el tipo del pokemon es igual al tipo seleccionado
     });
 }
 function buscarPokemon() {
     const buscarPokemonInput = document.querySelector("#buscarPokemon");
-    const nombrePokemon = buscarPokemonInput.value.toLowerCase();
+    const nombrePokemon = buscarPokemonInput.value.toLowerCase();//obtiene el valor de entrada del input seleccionado y lo pasa a minusculas
 
     const pokemonCards = document.querySelectorAll(".pokemon-card");
     pokemonCards.forEach(card => {
+        //obtiene el nombre de cada pokemon y lo pasa a minusculas
         const nombre = card.dataset.nombre.toLowerCase();
+        //verifica si el nombre del pokemon es e mismo que en la tarjeta si es asi lo muestra en bloque si no lo oculta
         card.style.display = (nombre.includes(nombrePokemon) || nombrePokemon === "") ? "block" : "none";
     });
 }
-
-function crearPokemonCards(pokemons) {
+function crearPokemonCardData(pokemons) {
     const pokemonCards = document.querySelector("#pokemonCards");
     pokemonCards.innerHTML = "";
     pokemons.forEach(pokemon => {
-        fetch(pokemon.url)
+        fetch(pokemon.url)//hace lamado a la url para obtener los datos
             .then(res => res.json())
             .then(PokemonData => {
-                const card = crearCard(PokemonData);
+                const card = crearCardImg(PokemonData);//llama la funcion la cual trae las imagenes de cada pokemon
                 card.dataset.nombre = PokemonData.name; // asigna el nombre del Pokemon como atributo de datos
-                pokemonCards.appendChild(card);
+                pokemonCards.appendChild(card);//agrega el elemnto "card" al elemento "pokemonCards" y asi se muestre el pokemon
             });
     });
 }
 
-function crearCard(pokemonData) {
+function crearCardImg(pokemonData) {
     const card = document.createElement("div");//crea un elemento de tipo div
     card.classList.add("pokemon-card");//le da una clase al elemento div ceado
+    //asigna el atributo type al "div" , el atributo contiene los nombres de todos lo tipos de elementos
     card.dataset.types = pokemonData.types.map(type => type.type.name).join(",");
     
-    const img = document.createElement("img");
-    img.src = pokemonData.sprites.front_default;
-    card.appendChild(img);
+    const img = document.createElement("img");//crea un elemento (imagen) y se almacena 
+    img.src = pokemonData.sprites.front_default;//inserta el src de la imagen de la url para mostrar la imagen predeterminada de cada pokemon
+    card.appendChild(img);//agrega la imagen al elemento "div"
     card.addEventListener("click", () => infoPokemon(pokemonData));
-    return card;
+    return card;//devuelve la tarjeta creada
 }
 
 function infoPokemon(pokemon) {
@@ -130,9 +132,6 @@ function infoPokemon(pokemon) {
                 <div>
                     <label for="abilities">Habilidades :</label>
                     <input class="abilities" type="text" id="abilities" value="${pokemon.abilities.map(a => a.ability.name).join(', ')}" readonly />
-                </div>
-                <div>
-                    <label for="type">Tipo: <span id="type_value">${pokemon.types.map(type => type.type.name).join(', ')}</span></label>
                 </div>
             </div>
         `,
