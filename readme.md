@@ -1,3 +1,6 @@
+![Pokémon Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1920px-International_Pok%C3%A9mon_logo.svg.png)
+
+
 # Aplicación Web de Pokemon API
 
 este README proporciona una descripcion general del codigo HTML y JavaScript de una aplicación web de Pokemon API. Esta aplicacion web permite a los usuarios interactuar con la API de Pokemon para ver y filtrar Pokemon.
@@ -8,7 +11,7 @@ este README proporciona una descripcion general del codigo HTML y JavaScript de 
 - [como empezar](#como-empezar)
 - [funcionalidades](#funcionalidades)
 - [como usar](#como-usar)
-
+- [nueva funcionalidad: actualizacion de datos](#nueva-funcionalidad-actualizacion-de-datos)
 
 ## descripcion del proyecto
 
@@ -25,36 +28,35 @@ el proyecto consta de archivos HTML, CSS y JavaScript que constan de :
 - `style.css`: el archivo CSS que aplica estilos a los elementos de la pagina web.
 - `index.js`: el archivo JavaScript que gestiona las solicitudes a la API y las interacciones del usuario.
 
-## como Empezar
+## como empezar
 
 1. para ejecutar la aplicación web de Pokemon API, sigue estos pasos:
 
 1. clona el repositorio en tu máquina local:
 
-  ` git clone https://github.com/leidert11/api_pokemon.git`
-
+` git clone https://github.com/leidert11/api_pokemon.git`
 
 abre el archivo `index.html` en un navegador web para comenzar a usar la aplicación.
 
-## Funcionalidades
+## funcionalidades
 
-### 1. Visualización de Tarjetas de Pokemon
+### 1. visualización de Tarjetas de Pokemon
 
 - cuando la pagina se carga, muestra un conjunto predeterminado de tarjetas de Pokemon (20 de forma predeterminada).
 - cada tarjeta muestra la imagen y el nombre del Pokemon.
 
-### 2. Filtrado de Pokemon por Tipo
+### 2. filtrado de Pokemon por Tipo
 
 - puedes filtrar Pokemon por sus tipos haciendo clic en los botones de tipo.
 - los botones de tipo se generan dinámicamente en función de los tipos de Pokemon disponibles en la API.
 - al hacer clic en un boton de tipo, se mostrarán solo los Pokemon de ese tipo y se ocultarán los demas.
 
-### 3. Filtrado de Pokemon por Cantidad
+### 3. filtrado de Pokemon por Cantidad
 
 - puedes cambiar la cantidad de tarjetas de Pokemon que se muestran utilizando el campo de entrada y el boton "mostrar".
 - la aplicación obtendra y mostrara la cantidad especificada de tarjetas de Pokemon.
 
-### 4. Búsqueda de Pokemon por Nombre
+### 4. busqueda de Pokemon por Nombre
 
 - puedes buscar Pokemon por nombre utilizando el campo de entrada "buscar Pokemon" y el boton "buscar".
 - la aplicación mostrara Pokemon cuyos nombres coincidan con la consulta de busqueda.
@@ -71,7 +73,9 @@ abre el archivo `index.html` en un navegador web para comenzar a usar la aplicac
 
 3. haz clic en una tarjeta de Pokemon para ver información detallada sobre ese Pokemon, incluyendo su tipo, experiencia, habilidades, estadísticas y una imagen.
 
+## nueva funcionalidad: actualizacion de datos
 
-# hecho por leider tami 
+Ahora puedes actualizar fácilmente la información de tus Pokémon! Cuando selecciones un Pokémon , si el valor del boton es "actualizar" significa que puedes
+actualizar las estadisticas del pokemon que elejiste,si el boton esta "OK" significa que los datos del pokemon ya fueron actualizados y ya no se podran  modificar y estaran guardados en la api simulada de mockapi.
 
-# nota: no logre hacer que se actualizaran  los datos para subirlos al mockapi asi que todo codigo de prueba no lo subo al codigo
+# hecho por leider tami
