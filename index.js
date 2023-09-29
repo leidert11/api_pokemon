@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded",() => {
     const buscarBoton = document.querySelector("#buscarBoton");
     buscarBoton.addEventListener("click", buscarPokemon); //al hacer click se ejecutara la funcion buscarPokemon
 });
-//solicitu de la api para mostrar pokemones
+//solicitud de la api para mostrar pokemones
 function getPokemon(limite) {//de esta manera podra el usuario escoger la cantidd de pokemon que desea ver
     fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limite}`)
         .then(res => res.json())
@@ -76,9 +76,9 @@ function crearPokemonCardData(pokemons) {
     pokemons.forEach(pokemon => {
         fetch(pokemon.url)//hace lamado a la url para obtener los datos
             .then(res => res.json())
-            .then(PokemonData => {
-                const card = crearCardImg(PokemonData);//llama la funcion la cual trae las imagenes de cada pokemon
-                card.dataset.nombre = PokemonData.name; // asigna el nombre del Pokemon como atributo de datos
+            .then(pokemonData => {
+                const card = crearCardImg(pokemonData);//llama la funcion la cual trae las imagenes de cada pokemon
+                card.dataset.nombre = pokemonData.name; // asigna el nombre del Pokemon como atributo de datos
                 pokemonCards.appendChild(card);//agrega el elemnto "card" al elemento "pokemonCards" y asi se muestre el pokemon
             });
     });
@@ -98,46 +98,127 @@ function crearCardImg(pokemonData) {
 }
 
 function infoPokemon(pokemon) {
-    Swal.fire({
-        title: `${pokemon.name}`,
-        html: `
-            <div class="pokemon-info" >
+
+    const urlMockapi = 'https://6509e17df6553137159c2ff5.mockapi.io/pokemon';
+    
+    let actualizado = false;//esta variable servira para determinar si el pokemon fue actualizado y asi cambiar el valor del boton
+    fetch(urlMockapi)
+        .then(res => res.json())//una vez que los datos son recibidos se convierten a formato JSON.
+        .then(mockAPIData => {//procesan datos
+            const pokemonData = mockAPIData.find(item => item.name === pokemon.name);//se busca un objeto que tenga el mismo nombre que el Pokemon proporcionado como argumento a la función.
+
+            actualizado = pokemonData ? true : actualizado;//si se encuaentra un objeto con el mismo noombre se pasa a true
+
+            const confirmButtonText  = actualizado ? 'OK' : 'Actualizar';//si el pokemon esta actualizado su valor sera ok
+            Swal.fire({
+                title: `${pokemon.name}`,
+                html: `
+                <div class="pokemon-info">
                 <div>
-                    <label for="type">Tipo: <span id="type_value">${pokemon.types.map(type => type.type.name).join(', ')}</span></label>
+                    <label>Tipo: <span>${pokemon.types.map(type => type.type.name).join(', ')}</span></label>
                 </div>
                 <div>
-                    <label for="base_experience">Experiencia: <span id="base_experience_value">${pokemon.base_experience}</span></label>
-                    <input type="range" id="base_experience" value="${pokemon.base_experience}" min="0" max="300" readonly /> 
+                    <label>Experiencia: <span>${pokemonData ? pokemonData.experience : pokemon.experience}</span></label>
+                    <input type="range" id="experience" value="${pokemonData ? pokemonData.experience : pokemon.experience}" min="0" max="300" />
                 </div>
                 <div>
-                    <label for="power">Poder: <span id="power_value">${pokemon.stats[1].base_stat}</span></label>
-                    <input type="range" id="power" value="${pokemon.stats[1].base_stat}" min="0" max="150" readonly /> 
+                    <label>Vida: <span>${pokemonData ? pokemonData.vida : pokemon.stats[0].base_stat}</span></label>
+                    <input type="range" id="vida" value="${pokemonData ? pokemonData.vida : pokemon.stats[0].base_stat}" min="0" max="150" />
                 </div>
                 <div>
-                    <label for="hp">Vida: <span id="hp_value">${pokemon.stats[0].base_stat}</span></label>
-                    <input type="range" id="hp" value="${pokemon.stats[0].base_stat}" min="0" max="150" readonly /> 
+                    <label>Poder: <span>${pokemonData ? pokemonData.power : pokemon.stats[1].base_stat}</span></label>
+                    <input type="range" id="power" value="${pokemonData ? pokemonData.power : pokemon.stats[1].base_stat}" min="0" max="150" />
                 </div>
                 <div>
-                    <label for="speed">Velocidad: <span id="speed_value">${pokemon.stats[5].base_stat}</span></label>
-                    <input type="range" id="speed" value="${pokemon.stats[5].base_stat}" min="0" max="150" readonly /> 
+                    <label>Defensa: <span>${pokemonData ? pokemonData.defensa : pokemon.stats[2].base_stat}</span></label>
+                    <input type="range" id="defensa" value="${pokemonData ? pokemonData.defensa : pokemon.stats[2].base_stat}" min="0" max="150" />
                 </div>
                 <div>
-                    <label for="defense">Defensa: <span id="defense_value">${pokemon.stats[2].base_stat}</span></label>
-                    <input type="range" id="defense" value="${pokemon.stats[2].base_stat}" min="0" max="150" readonly /> 
+                    <label>Ataque: <span>${pokemonData ? pokemonData.ataque : pokemon.stats[3].base_stat}</span></label>
+                    <input type="range" id="ataque" value="${pokemonData ? pokemonData.ataque : pokemon.stats[3].base_stat}" min="0" max="150" />
                 </div>
                 <div>
-                    <label for="attack">Ataque: <span id="attack_value">${pokemon.stats[3].base_stat}</span></label>
-                    <input type="range" id="attack" value="${pokemon.stats[3].base_stat}" min="0" max="150" readonly /> 
+                    <label>Ataque Especial: <span>${pokemonData ? pokemonData.ataqueEspacial : pokemon.stats[4].base_stat}</span></label>
+                    <input type="range" id="specialAttack" value="${pokemonData ? pokemonData.ataqueEspacial : pokemon.stats[4].base_stat}" min="0" max="150" />
                 </div>
                 <div>
-                    <label for="abilities">Habilidades :</label>
-                    <input class="abilities" type="text" id="abilities" value="${pokemon.abilities.map(a => a.ability.name).join(', ')}" readonly />
+                    <label>Velocidad: <span>${pokemonData ? pokemonData.velocidad : pokemon.stats[5].base_stat}</span></label>
+                    <input type="range" id="velocidad" value="${pokemonData ? pokemonData.velocidad : pokemon.stats[5].base_stat}" min="0" max="150" />
+                </div>
+                <div>
+                    <label>Habilidades: <span>${pokemon.abilities.map(a => a.ability.name).join(', ')}</span></label>
                 </div>
             </div>
-        `,
-        imageUrl: pokemon.sprites.front_default,
-        imageWidth: 200,
-        imageHeight: 200,
-        imageAlt: 'Custom image',
-    });
+            
+                `,
+                imageUrl: pokemon.sprites.front_default,
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+                showCancelButton: true, 
+                confirmButtonText : confirmButtonText ,
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                  
+                    // obtener valores de los inputs
+                    const experience = document.getElementById('experience').value;
+                    const vida = document.getElementById('vida').value;
+                    const power = document.getElementById('power').value;
+                    const defensa = document.getElementById('defensa').value;
+                    const ataque = document.getElementById('ataque').value;
+                    const ataqueEspacial = document.getElementById('specialAttack').value;
+                    const velocidad = document.getElementById('velocidad').value;
+
+                    // datos a enviar
+                    const dataEnviar = {
+                        name: pokemon.name,
+                        experience: experience,
+                        vida: vida,
+                        power: power,
+                        defensa: defensa,
+                        ataque: ataque,
+                        ataqueEspacial: ataqueEspacial,
+                        velocidad: velocidad,
+                    };
+
+                    if (pokemonData) {
+                       //si el Pokemon ya existe en la base de datos se actualiza su informacion con los nuevos datos
+                        dataEnviar.id = pokemonData.id; 
+                    } else {
+                        //si no existen datos en mockApi se enviaran los datos
+                        enviarDatos(dataEnviar);
+                    }
+                }
+            });
+        });
+}
+
+async function enviarDatos(data) {
+    const url = 'https://6509e17df6553137159c2ff5.mockapi.io/pokemon';
+    try {
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({//se convierte en json los datos y se establece como el cuerpo de la solicitud
+                name: data.name,
+                experience: data.experience, 
+                vida: data.vida,
+                power: data.power, 
+                defensa: data.defensa, 
+                ataque: data.ataque, 
+                ataqueEspacial: data.ataqueEspacial,
+                velocidad: data.velocidad, 
+            }),
+        });
+        if (res.ok) {
+            console.log('datos enviados exitosamente');
+        } else {
+            console.error('error al enviar datos a mockApi.');
+        }
+    } catch (error) {
+        console.error('error en la solicitud a mockApi:', error);
+    }
 }
