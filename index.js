@@ -99,13 +99,13 @@ function crearCardImg(pokemonData) {
 
 function infoPokemon(pokemon) {
 
-    const urlMockapi = 'https://6509e17df6553137159c2ff5.mockapi.io/pokemon';
+    const url = 'http://localhost:3000/pokemon'; 
     
     let actualizado = false;//esta variable servira para determinar si el pokemon fue actualizado y asi cambiar el valor del boton
-    fetch(urlMockapi)
+    fetch(url)
         .then(res => res.json())//una vez que los datos son recibidos se convierten a formato JSON.
-        .then(mockAPIData => {//procesan datos
-            const pokemonData = mockAPIData.find(item => item.name === pokemon.name);//se busca un objeto que tenga el mismo nombre que el Pokemon proporcionado como argumento a la función.
+        .then(apiData => {//procesan datos
+            const pokemonData = apiData.find(item => item.name === pokemon.name);//se busca un objeto que tenga el mismo nombre que el Pokemon proporcionado como argumento a la función.
 
             actualizado = pokemonData ? true : actualizado;//si se encuaentra un objeto con el mismo noombre se pasa a true
 
@@ -186,39 +186,34 @@ function infoPokemon(pokemon) {
                        //si el Pokemon ya existe en la base de datos se actualiza su informacion con los nuevos datos
                         dataEnviar.id = pokemonData.id; 
                     } else {
-                        //si no existen datos en mockApi se enviaran los datos
+                        //si no existen datos en el json server se enviaran los datos
                         enviarDatos(dataEnviar);
                     }
                 }
             });
         });
 }
+async function enviarDatos(data, e) {
+    
+    e ? e.preventDefault() : null;
 
-async function enviarDatos(data) {
-    const url = 'https://6509e17df6553137159c2ff5.mockapi.io/pokemon';
+    const url = 'http://localhost:3000/pokemon'; 
+
     try {
         const res = await fetch(url, {
-            method: 'POST',
+            method: 'POST', 
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({//se convierte en json los datos y se establece como el cuerpo de la solicitud
-                name: data.name,
-                experience: data.experience, 
-                vida: data.vida,
-                power: data.power, 
-                defensa: data.defensa, 
-                ataque: data.ataque, 
-                ataqueEspacial: data.ataqueEspacial,
-                velocidad: data.velocidad, 
-            }),
+            body: JSON.stringify(data), //envia los datos como JSON al cuerpo de la respuesta
         });
+
         if (res.ok) {
-            console.log('datos enviados exitosamente');
+            console.log('datos enviados correctamente');
         } else {
-            console.error('error al enviar datos a mockApi.');
+            console.error('error al enviar datos');
         }
     } catch (error) {
-        console.error('error en la solicitud a mockApi:', error);
+        console.error('error en la solicitud al JSON Server:', error);
     }
 }

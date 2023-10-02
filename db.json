@@ -1,0 +1,175 @@
+{
+  "pokemon": [
+    {
+      "name": "charizard",
+      "experience": "0",
+      "vida": "0",
+      "power": "0",
+      "defensa": "0",
+      "ataque": "0",
+      "ataqueEspacial": "0",
+      "velocidad": "0",
+      "id": 1
+    },
+    {
+      "name": "venusaur",
+      "experience": "33",
+      "vida": "39",
+      "power": "34",
+      "defensa": "27",
+      "ataque": "31",
+      "ataqueEspacial": "10",
+      "velocidad": "18",
+      "id": 2
+    },
+    {
+      "name": "bulbasaur",
+      "experience": "7",
+      "vida": "45",
+      "power": "49",
+      "defensa": "49",
+      "ataque": "65",
+      "ataqueEspacial": "65",
+      "velocidad": "45",
+      "id": 3
+    },
+    {
+      "name": "squirtle",
+      "experience": "150",
+      "vida": "44",
+      "power": "48",
+      "defensa": "65",
+      "ataque": "95",
+      "ataqueEspacial": "64",
+      "velocidad": "43",
+      "id": 4
+    },
+    {
+      "name": "metapod",
+      "experience": "150",
+      "vida": "50",
+      "power": "20",
+      "defensa": "55",
+      "ataque": "25",
+      "ataqueEspacial": "25",
+      "velocidad": "92",
+      "id": 5
+    },
+    {
+      "name": "raticate",
+      "experience": "150",
+      "vida": "55",
+      "power": "81",
+      "defensa": "60",
+      "ataque": "50",
+      "ataqueEspacial": "70",
+      "velocidad": "21",
+      "id": 6
+    },
+    {
+      "name": "kakuna",
+      "experience": "219",
+      "vida": "45",
+      "power": "25",
+      "defensa": "50",
+      "ataque": "25",
+      "ataqueEspacial": "25",
+      "velocidad": "35",
+      "id": 7
+    },
+    {
+      "name": "rattata",
+      "experience": "230",
+      "vida": "30",
+      "power": "56",
+      "defensa": "35",
+      "ataque": "25",
+      "ataqueEspacial": "35",
+      "velocidad": "72",
+      "id": 8
+    },
+    {
+      "name": "butterfree",
+      "experience": "150",
+      "vida": "60",
+      "power": "45",
+      "defensa": "50",
+      "ataque": "90",
+      "ataqueEspacial": "80",
+      "velocidad": "116",
+      "id": 9
+    },
+    {
+      "name": "pidgey",
+      "experience": "150",
+      "vida": "40",
+      "power": "45",
+      "defensa": "40",
+      "ataque": "35",
+      "ataqueEspacial": "35",
+      "velocidad": "117",
+      "id": 10
+    },
+    {
+      "name": "caterpie",
+      "experience": "184",
+      "vida": "45",
+      "power": "30",
+      "defensa": "35",
+      "ataque": "20",
+      "ataqueEspacial": "20",
+      "velocidad": "45",
+      "id": 11
+    },
+    {
+      "name": "pidgeot",
+      "experience": "224",
+      "vida": "83",
+      "power": "80",
+      "defensa": "75",
+      "ataque": "70",
+      "ataqueEspacial": "70",
+      "velocidad": "101",
+      "id": 12
+    },
+    {
+      "name": "ivysaur",
+      "experience": "150",
+      "vida": "60",
+      "power": "62",
+      "defensa": "63",
+      "ataque": "80",
+      "ataqueEspacial": "133",
+      "velocidad": "60",
+      "id": 13
+    },
+    {
+      "name": "gloom",
+      "experience": "150",
+      "vida": "60",
+      "power": "65",
+      "defensa": "70",
+      "ataque": "85",
+      "ataqueEspacial": "75",
+      "velocidad": "79",
+      "id": 14
+    },
+    {
+      "name": "weedle",
+      "experience": "150",
+      "vida": "40",
+      "power": "35",
+      "defensa": "30",
+      "ataque": "20",
+      "ataqueEspacial": "20",
+      "velocidad": "122",
+      "id": 15
+    },
+    {
+      "name": "pikachu",
+      "experience": "150",
+      "vida": "35",
+      "id": 16
+    }
+  ]
+}

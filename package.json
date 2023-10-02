@@ -1,0 +1,23 @@
+{
+  "name": "api_pokemon",
+  "version": "1.0.0",
+  "description": "![Pokémon Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1920px-International_Pok%C3%A9mon_logo.svg.png)",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch db.json --port 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leidert11/api_pokemon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leidert11/api_pokemon/issues"
+  },
+  "homepage": "https://github.com/leidert11/api_pokemon#readme",
+  "devDependencies": {
+    "json-server": "0.17.4"
+  }
+}
