@@ -1,5 +1,17 @@
-![Pokémon Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1920px-International_Pok%C3%A9mon_logo.svg.png)
+![Pokemon Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1920px-International_Pok%C3%A9mon_logo.svg.png)
 
+
+## Instalación de JSON Server
+
+Previo a la instalación de JSON Server, asegúrate de tener Node.js instalado en tu sistema. En caso de que no lo tengas, dirígete al siguiente enlace [Node.js website](https://nodejs.org/).
+
+## Cómo instalar JSON Server
+
+1. Abre una nueva terminal ubicada en la carpeta del proyecto.
+
+2. Ejecuta el comando `npm i` en la terminal para descargar las deendencias.
+
+3. Levanta el servidor JSON con el comando `npm start` para acceder a la informacion de los pokemon.
 
 # Aplicación Web de Pokemon API
 
@@ -27,6 +39,7 @@ el proyecto consta de archivos HTML, CSS y JavaScript que constan de :
 - `index.html`: el archivo HTML principal que define la estructura de la pagina web.
 - `style.css`: el archivo CSS que aplica estilos a los elementos de la pagina web.
 - `index.js`: el archivo JavaScript que gestiona las solicitudes a la API y las interacciones del usuario.
+- `db.json` : el archivo json que guarda la data actualizada de los pokemon.
 
 ## como empezar
 
@@ -75,7 +88,7 @@ abre el archivo `index.html` en un navegador web para comenzar a usar la aplicac
 
 ## nueva funcionalidad: actualizacion de datos
 
-Ahora puedes actualizar fácilmente la información de tus Pokémon! Cuando selecciones un Pokémon , si el valor del boton es "actualizar" significa que puedes
-actualizar las estadisticas del pokemon que elejiste,si el boton esta "OK" significa que los datos del pokemon ya fueron actualizados y ya no se podran  modificar y estaran guardados en la api simulada de mockapi.
+Ahora puedes actualizar facilmente la información de tus Pokemon cuando selecciones un Pokemon , si el valor del boton es "actualizar" significa que puedes
+modificar las estadisticas del pokemon que elejiste, si el boton esta "OK" significa que los datos del pokemon ya fueron actualizados y ya no se podran  modificar , los datos actualizados se guardaran en el json server.
 
 # hecho por leider tami
